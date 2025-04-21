@@ -1,5 +1,18 @@
-// Input with id "username" on change event
-document.getElementById("username").addEventListener("input", (event) => {
+// Named function for username input callback
+/**
+ * Callback function for handling username input validation.
+ * Validates the input value against a regex pattern that enforces:
+ * - At least one uppercase letter
+ * - At least one numeric digit
+ * - At least one special character (!@#$%^&*~)
+ * - A minimum length of 8 characters
+ * 
+ * Updates the input field's border color to green if the value is valid,
+ * or red if invalid.
+ *
+ * @param {Event} event - The input event triggered by the username field.
+ */
+function usernameInputCallback(event) {
   const username = event.target.value;
   const regex =
     /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*~])[A-Za-z0-9!@#$%^&*~]{8,}$/;
@@ -8,7 +21,10 @@ document.getElementById("username").addEventListener("input", (event) => {
   event.target.style.border = regex.test(username)
     ? "2px solid green"
     : "2px solid red";
-});
+}
+
+// Input with id "username" on change event
+document.getElementById("username").addEventListener("input", usernameInputCallback);
 
 document.addEventListener("DOMContentLoaded", () => {
   const downloadBtn = document.getElementById("downloadBtn");
