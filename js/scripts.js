@@ -144,3 +144,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Fetch dummy data and update input fields
+  fetch("http://localhost:3000/get-data")
+    .then((response) => response.json())
+    .then((data) => {
+      Object.keys(data).forEach((month) => {
+        const { income, expenses } = data[month];
+        document.getElementById(`${month}-income`).value = income;
+        document.getElementById(`${month}-expenses`).value = expenses;
+      });
+    })
+    .catch((error) => console.error("Error fetching data:", error));
+});
